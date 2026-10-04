@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Romu</title>
+    <style>
+      :root {
+        --bg1: #12061d;
+        --bg2: #2b0d3a;
+        --card: rgba(255, 255, 255, 0.08);
+        --text: #fff7fb;
+        --muted: #f6d8e6;
+        --pink: #ff6bb5;
+        --rose: #ff4d8d;
+        --purple: #c084fc;
+        --gold: #ffd166;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at top, #2f103d 0%, var(--bg1) 35%, #0a0614 100%);
+        overflow-x: hidden;
+      }
+
+      body {
+        position: relative;
+      }
+
+      .hearts, .hearts::before, .hearts::after {
+        position: fixed;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        background-repeat: repeat;
+        background-size: 180px 180px;
+        opacity: 0.6;
+      }
+
+      .hearts {
+        background-image:
+          radial-gradient(circle at 20% 20%, rgba(255, 118, 168, 0.8) 0 10px, transparent 11px),
+          radial-gradient(circle at 75% 35%, rgba(255, 181, 218, 0.9) 0 12px, transparent 13px),
+          radial-gradient(circle at 50% 75%, rgba(255, 109, 169, 0.8) 0 11px, transparent 12px),
+          radial-gradient(circle at 35% 55%, rgba(255, 145, 197, 0.8) 0 10px, transparent 11px);
+        animation: floatHearts 18s linear infinite;
+      }
+
+      .hearts::before {
+        background-image:
+          radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.6) 0 8px, transparent 9px),
+          radial-gradient(circle at 70% 18%, rgba(255, 153, 204, 0.8) 0 9px, transparent 10px),
+          radial-gradient(circle at 80% 75%, rgba(255, 223, 235, 0.7) 0 7px, transparent 8px);
+        animation: floatHearts 26s linear infinite reverse;
+      }
+
+      .hearts::after {
+        background-image:
+          radial-gradient(circle at 40% 25%, rgba(255, 109, 169, 0.7) 0 9px, transparent 10px),
+          radial-gradient(circle at 90% 45%, rgba(255, 180, 220, 0.8) 0 8px, transparent 9px),
+          radial-gradient(circle at 60% 85%, rgba(255, 117, 188, 0.7) 0 8px, transparent 9px);
+        animation: floatHearts 22s linear infinite;
+      }
+
+      @keyframes floatHearts {
+        0% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-18px) scale(1.06); }
+        100% { transform: translateY(0) scale(1); }
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 20px;
+      }
+
+      .card {
+        width: min(820px, 100%);
+        background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        border-radius: 28px;
+        backdrop-filter: blur(8px);
+        overflow: hidden;
+      }
+
+      .top-bar {
+        text-align: center;
+        padding: 18px 20px 8px;
+        letter-spacing: 0.2em;
+        font-size: 0.74rem;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      .content {
+        padding: 20px 28px 36px;
+        text-align: center;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: rgba(255, 107, 181, 0.18);
+        border: 1px solid rgba(255, 107, 181, 0.35);
+        color: #ffdff0;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 6vw, 5.2rem);
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .romu {
+        display: inline-block;
+        background: linear-gradient(135deg, #ffd7ea, #ff8bbd, #c084fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 28px rgba(255, 128, 192, 0.34);
+        animation: glow 2.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from { filter: brightness(1); }
+        to { filter: brightness(1.25); }
+      }
+
+      .message {
+        margin: 22px auto 0;
+        max-width: 620px;
+        font-size: clamp(1.03rem, 2vw, 1.22rem);
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      .heart-box {
+        position: relative;
+        width: 220px;
+        height: 220px;
+        margin: 26px auto 18px;
+        animation: pulse 1.7s ease-in-out infinite;
+      }
+
+      .heart {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font-size: 9rem;
+        filter: drop-shadow(0 0 22px rgba(255, 100, 179, 0.8));
+        transform-origin: center;
+        animation: wobble 2.8s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.08); }
+      }
+
+      @keyframes wobble {
+        0%, 100% { transform: rotate(-6deg) scale(1); }
+        25% { transform: rotate(4deg) scale(1.05); }
+        50% { transform: rotate(-2deg) scale(1.08); }
+        75% { transform: rotate(5deg) scale(1.04); }
+      }
+
+      .cta {
+        margin-top: 24px;
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        padding: 16px 28px;
+        border-radius: 999px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .primary {
+        color: white;
+        background: linear-gradient(135deg, var(--pink), var(--rose));
+        box-shadow: 0 14px 30px rgba(255, 77, 141, 0.45);
+      }
+
+      .secondary {
+        color: var(--text);
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .footer {
+        margin-top: 18px;
+        color: #f9d6eb;
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+
+      @media (max-width: 640px) {
+        .content { padding: 20px 18px 28px; }
+        .top-bar { letter-spacing: 0.12em; }
+        .heart-box {
+          width: 170px;
+          height: 170px;
+        }
+        .heart { font-size: 7rem; }
+        .button { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hearts"></div>
+
+    <main class="container">
+      <section class="card">
+        <div class="top-bar">A little note from my heart</div>
+        <div class="content">
+          <div class="badge">Forever starts here</div>
+          <h1>Romu, <span class="romu">Will you be mine?</span></h1>
+
+          <div class="heart-box" aria-label="heart animation">
+            <div class="heart">❤</div>
+          </div>
+
+          <p class="message">
+            From the moment I started noticing you, my world somehow became brighter, softer,
+            and a lot more beautiful. Every smile of yours feels like sunshine, and every moment
+            with you feels like a dream I never want to wake up from. Romu, I want to be the one
+            who makes you smile every day, the one who stands beside you, and the one who loves you
+            more than words can say. Will you be my girlfriend?
+          </p>
+
+          <div class="cta">
+            <button class="button primary" onclick="showLove()">Yes, always 💖</button>
+            <button class="button secondary" onclick="showLove()">I’d love to 😊</button>
+          </div>
+
+          <div class="footer" id="loveMessage">My heart is already yours.</div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      function showLove() {
+        const msg = document.getElementById('loveMessage');
+        msg.textContent = 'You just made my heart the happiest place on Earth. ❤️';
+        msg.style.color = '#ffe7f4';
+        msg.style.fontWeight = '700';
+      }
+    </script>
+  </body>
+</html>
